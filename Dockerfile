@@ -11,4 +11,4 @@ COPY . .
 RUN pipenv run python ./prepare_data.py
 
 WORKDIR ./notebooks
-ENTRYPOINT [ ". ./entrypoint.sh" ]
+ENTRYPOINT [ "./entrypoint.sh" ]
