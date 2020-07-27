@@ -11,7 +11,7 @@ A simple experiment on distributed training using TensorFlow and Horovod.
 ## Usage
 1) Pull and run the image \
 `docker run -dp 8887:8888 --name distributed_training --rm daveduke/distributed_training` 
-2) Run a training script 
+2) Run a training script
 * One node training may be ran inside the jupyter notebook at `localhost:8887` or calling \
 `docker exec -it distributed_training bash` \
 `pipenv run horovodrun -np 1 -H localhost:1 python horovod_train.py 2> /dev/null`
