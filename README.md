@@ -1,2 +1,5 @@
 # distributed_training
 A simple experiment on distributed training in TensorFlow.
+
+docker run -dp 8887:8888 1b007d21e590
+pipenv run horovodrun -np 3 -H localhost:3 --timeline-filename ./timeline.json --timeline-mark-cycles python horovod_train.py 2> /dev/null

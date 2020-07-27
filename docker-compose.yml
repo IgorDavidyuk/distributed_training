@@ -2,11 +2,11 @@ version: '3.7'
 
 services:
 
-  converter:
+  python_env:
     build:
       context: .
       dockerfile: Dockerfile
     ports: 
-      - 88888:8888
-    # volumes:
-    #   - ./:/usr/src/app
+      - 8887:8888
+    volumes:
+      - ./:/usr/src/app/
