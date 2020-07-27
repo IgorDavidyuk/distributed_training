@@ -1,3 +1,4 @@
+import numpy as np
 import tensorflow as tf
 import horovod.tensorflow.keras as hvd
 
@@ -5,6 +6,12 @@ import horovod.tensorflow.keras as hvd
 hvd.init()
 # Prepare data
 (train_images, train_labels), (test_images, test_labels) = tf.keras.datasets.cifar10.load_data()
+batch_size = 32
+barches_total = (len(train_images) // batch_size + 1) 
+# prepare training subset for a particular worker
+train_indeces = np.arange(len(train_images))
+training_set = np.random.choice(train_indeces, len(train_images)//hvd.size(), replace=False)
+train_images, train_labels = train_images[training_set], train_labels[training_set]
 # Normalize pixel values to be between 0 and 1
 train_images, test_images = train_images / 255.0, test_images / 255.0
 
@@ -63,7 +70,5 @@ validation_data = None
 # Train the model.
 # Horovod: adjust number of steps based on number of GPUs.
 # steps_per_epoch=500 // hvd.size(),
-batch_size = 32
-barches_total = (len(train_images) // batch_size + 1) 
 model.fit(train_images, train_labels, validation_data=validation_data, epochs=3, batch_size=batch_size, \
         steps_per_epoch=barches_total // hvd.size(), callbacks=callbacks, verbose=verbose)
