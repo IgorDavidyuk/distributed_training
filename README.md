@@ -21,4 +21,4 @@ This graph shows lines that I prefer to interprete as consequent calls by three 
 
 ## Known issues
 * Although all the experiments run in a docker container, training behavior sometimes depends on the particular machine. For instance, available RAM may be not enough to run training scripts with current settings. If some of the training scripts fail to run, try decreasing the batch size in debug mode, calling `docker-compose up --build`, inside the repository folder.
-* Distributed training process results for some reason is not deterministic. 
+* Distributed training process results for some reason is not deterministic. The differences in loss behaiviour from run to run may not be explained solely by errors in operations with floating points or random seed changes.
