@@ -17,7 +17,9 @@ Docker image containes a baseline script to run training on one node and a distr
 `pipenv run horovodrun -np 3 -H localhost:3 --timeline-filename ./timeline.json --timeline-mark-cycles python horovod_train.py 2> /dev/null`
 
 ## Experiment results
-This graph shows lines that I prefer to interprete as consequent calls by three concurrent training processes.
+This graphs shows Horovod timeline visualization:
+* Allreduce calls merging weights 
+![alt text](https://github.com/IgorDavidyuk/distributed_training/blob/master/images/Screen%20Shot%202020-07-28%20at%2016.47.39.png)
 
 ## Known issues
 * Although all the experiments run in a docker container, training behavior sometimes depends on a particular machine. For instance, available RAM may be not enough to run training scripts with deafault settings. If some of the training scripts fail to run, try decreasing the batch size in debug mode, calling `docker-compose up --build -d`, inside the repository folder.
